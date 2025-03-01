@@ -9,7 +9,8 @@ import base64
 from groq import Groq
 import numpy as np
 
-# run this in the api directory: gunicorn app:app
+# run this in the api directory: gunicorn --timoeout 120 app:app
+# gunicorn -c gunicorn_config.py app:app
 
 # Load environment variables from .env file
 load_dotenv()
@@ -30,7 +31,7 @@ groq_client = Groq(
 params = {
     "width": 448,
     "height": 448,
-    "num_inference_steps": 5,
+    "num_inference_steps": 10,
     "guidance_scale": 10,
     "seed": random_seed
 }
