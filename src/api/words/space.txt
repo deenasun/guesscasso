@@ -10,3 +10,36 @@ UFO
 Astronaut
 Sun
 Spacesuit
+Satellite
+Planet
+Star
+Galaxy
+Comet
+Nebula
+Space Station
+Telescope
+Orbit
+Gravity
+Jupiter
+Saturn
+Venus
+Mercury
+Neptune
+Uranus
+Pluto
+Earth
+Milky Way
+Andromeda
+Supernova
+Cosmos
+Universe
+Space Shuttle
+Spacecraft
+Probe
+Rover
+Satellite Dish
+Space Walk
+Meteorite
+Constellation
+Solar System
+Launch Pad

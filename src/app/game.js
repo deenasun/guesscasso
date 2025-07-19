@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { GameContext } from './gameContext';
 
 function Game() {
+    const apiUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:8000' : process.env.NEXT_PUBLIC_API_URL;
     const TIME_PER_ROUND = 20; // Round duration in seconds
     const NUM_IMAGES = 10; // Number of images + noisy images
 
@@ -65,7 +66,7 @@ function Game() {
                 setTimeLeft((prevTime) => {
                     if (prevTime - 1 <= 0) {
                         clearInterval(interval); // Stop the timer when round ends
-                        setIsGameRunning(false); // End the game
+                        stopGame(); // End the game and set gameOver state
                         return TIME_PER_ROUND;
                     }
                     return prevTime - 1; // Decrement elapsed time
@@ -89,9 +90,9 @@ function Game() {
     // Fetch the generated image from the API
     const fetchImage = async () => {
         try {
-            const response = await fetch('/api/generate');
+            const endpoint = `${apiUrl}/api/generate`;
+            const response = await fetch(endpoint);
             const data = await response.json();
-            console.log('ANSWER: ', data.correctWords);
             setImages(data.images);
             updateCategories(data.categories);
             updateCorrectWords(data.correctWords);
@@ -103,7 +104,8 @@ function Game() {
     const checkAnswer = async (userGuess) => {
         const answer = `${correctWords[0]} ${correctWords[1]}`;
         try {
-            const response = await fetch('/api/evaluate', {
+            const endpoint = `${apiUrl}/api/evaluate`;
+            const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -147,7 +149,6 @@ function Game() {
                                 alt="Generated Image"
                                 width={448}
                                 height={448}
-                                layout="responsive"
                                 className="w-full max-w-[400px] bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center"
                                 onClick={() => {
                                     newGame ? startGame() : null;
@@ -159,7 +160,6 @@ function Game() {
                                 alt="Generated Image"
                                 width={448}
                                 height={448}
-                                layout="responsive"
                                 className="w-full max-w-[400px] bg-gray-200 rounded-lg overflow-hidden flex items-center justify-center"
                             />
                         )}
@@ -178,7 +178,6 @@ function Game() {
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
-                            console.log('Guess:', e.target[0].value);
                             handleAction(e.target[0].value);
                         }}
                         className="flex items-center gap-2"

@@ -1,12 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    async rewrites() {
-        return [
-            {
-                source: '/api/:path*',
-                destination: 'http://127.0.0.1:8000/api/:path*', // Proxy to Backend
-            },
-        ];
+    // Uncomment the line below when you want to build for static export (e.g., for Render static site)
+    output: 'export',
+    images: {
+        unoptimized: true,
     },
 };
 

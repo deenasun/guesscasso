@@ -17,3 +17,21 @@ Janitor
 Painter
 Ballerina
 Firefighter
+Doctor
+Nurse
+Teacher
+Police Officer
+Lawyer
+Engineer
+Architect
+Accountant
+Dentist
+Veterinarian
+Pharmacist
+Pilot
+Flight Attendant
+Waiter
+Waitress
+Cashier
+President
+Baker
